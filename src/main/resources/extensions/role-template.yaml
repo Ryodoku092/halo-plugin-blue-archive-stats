@@ -1,0 +1,23 @@
+# 公开访问授权（博客读者无需登录即可查看战绩页）
+# 机制: 聚合角色 —— 本 Role 的规则会被合并进 Halo 内置 anonymous 角色，
+# 未登录访客即获得 stats 资源的 get/list 权限（Halo 官方文档
+# developer-guide/plugin/security/rbac「聚合角色」章节 + Halo 源码
+# AuthorizationTest#anonymousUserShouldAccessResourcesByAggregatedRoles 验证）。
+# 规则与 CustomEndpoint 路径的对应（RequestInfoFactory 解析）:
+#   GET /apis/console.api.blue-archive.halo.run/v1alpha1/stats        → verb=list
+#   GET /apis/console.api.blue-archive.halo.run/v1alpha1/stats/html   → verb=get (name=html)
+# config/refresh/admin 不在此列 → 仍仅管理员可访问。
+apiVersion: v1alpha1
+kind: Role
+metadata:
+  name: plugin-blue-archive-stats-role-view-stats
+  labels:
+    halo.run/role-template: "true"
+    halo.run/hidden: "true"
+    rbac.authorization.halo.run/aggregate-to-anonymous: "true"
+  annotations:
+    rbac.authorization.halo.run/display-name: "蔚蓝档案战绩数据公开访问"
+rules:
+  - apiGroups: ["console.api.blue-archive.halo.run"]
+    resources: ["stats"]
+    verbs: ["get", "list"]

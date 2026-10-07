@@ -1,0 +1,30 @@
+name: Build & Release
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: gradle/actions/setup-gradle@v3
+        with:
+          java-version: "17"
+          distribution: temurin
+      - name: Build fat JAR
+        run: ./gradlew --no-daemon clean jar
+      - name: Extract version
+        id: ver
+        run: echo "v=$(grep -oP 'version\s*=\s*"\K[^"]+' build.gradle.kts)" >> "$GITHUB_OUTPUT"
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: build/libs/plugin-blue-archive-stats-${{ steps.ver.outputs.v }}.jar
+          draft: false
+          prerelease: false

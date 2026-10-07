@@ -1,0 +1,87 @@
+MIT License
+
+Copyright (c) 2026 独凉生 (duliangsheng)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---
+
+ADDITIONAL DISCLAIMERS / 附加免责声明（与 MIT 条款并行，不构成对 MIT 授权的限制）
+
+1. Unofficial / 非官方：
+   This is an unofficial community tool. It is NOT affiliated with, authorized,
+   sponsored, or endorsed by bilibili, Yostar, NEXON, or the Blue Archive
+   (蔚蓝档案) franchise or its rights holders.
+
+   本插件为社区第三方开源工具，与 bilibili（哔哩哔哩）、Yostar（悠星网络）、
+   NEXON 及《蔚蓝档案》官方无任何关联、授权、赞助或背书关系。
+
+2. Trademarks & Assets / 商标与素材：
+   "Blue Archive / 蔚蓝档案", character names, artwork and icons are trademarks
+   and copyrights of their respective owners. This repository distributes NO
+   asset files; all images are referenced by URL from bilibili's official CDN
+   and loaded directly by end-user browsers.
+
+   相关商标与角色素材版权归各自权利人所有。本仓库不分发任何素材文件，所有图片
+   以 URL 直链 bilibili 官方 CDN，由用户浏览器自行加载。
+
+3. Unofficial API / 非公开接口：
+   Data retrieval relies on undocumented bilibili web endpoints, which may
+   change, rate-limit, or break at any time. No continuous availability is
+   guaranteed.
+
+   数据获取依赖 bilibili 非公开网页接口，可能随时变更、限流或失效。
+
+4. Account Risk / 账号风险：
+   Using your own cookies to call these endpoints constitutes automated access
+   and MAY violate bilibili's Terms of Service, potentially resulting in
+   account restrictions or bans. Use at your own risk, at low frequency, for
+   displaying your own data only. The author accepts no liability for any
+   consequences.
+
+   使用 Cookie 调用接口属自动化访问，可能违反 bilibili 用户协议并导致账号被
+   风控或封禁。请仅低频用于展示自己账号的数据，后果自负。
+
+5. AI-Assisted Development / AI 辅助开发声明：
+   This project was developed with substantial assistance from AI coding
+   agents, under human direction, code review, and functional testing. The
+   source code in this repository is the complete and authoritative description
+   of the plugin's behavior; security review by users is encouraged.
+
+   本项目主要由 AI 编程代理辅助完成，人类负责需求、决策、审阅与实测。仓库源码
+   即插件全部行为，欢迎安全审计。
+
+6. Privacy / 隐私：
+   User credentials (cookie/UID) are stored only in local files on the user's
+   own Halo server and are sent only to official bilibili endpoints to fetch
+   the user's own stats. This plugin contains no telemetry or third-party
+   reporting.
+
+   用户凭据仅存于用户自有 Halo 服务器本地，仅用于向 bilibili 官方接口请求用户
+   本人数据；本插件不含任何遥测或第三方上报。
+
+7. Compliance / 合规：
+   Users are responsible for complying with applicable laws and bilibili's
+   Terms of Service. Scraping or querying other users' accounts is prohibited.
+
+   使用者须自行遵守所在辖区法律及 bilibili 服务条款；禁止用于批量爬取或查询
+   他人账号。
+
+By installing or using this software you acknowledge the disclaimers above.
+安装或使用本软件即表示你已阅读并同意上述声明。

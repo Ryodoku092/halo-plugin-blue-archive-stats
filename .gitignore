@@ -1,0 +1,30 @@
+# Build
+build/
+.gradle/
+*.class
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# Node (console UI)
+node_modules/
+ui/dist/
+
+# Local config & secrets — NEVER commit
+config.local.json
+*.local
+.env
+.env.*
+
+# Halo runtime data (if testing in place)
+plugins/configs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+build_log.txt

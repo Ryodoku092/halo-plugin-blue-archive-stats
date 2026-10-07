@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>蔚蓝档案战绩 - 配置</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: #f5f5f5;
+    color: #333;
+    padding: 20px;
+}
+.container { max-width: 600px; margin: 0 auto; }
+.card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.card h2 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.form-group { margin-bottom: 16px; }
+.form-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: #555;
+}
+.form-group .hint {
+    font-size: 12px;
+    color: #999;
+    margin-top: 4px;
+}
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.2s;
+}
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #4a9eff;
+}
+.form-group textarea { resize: vertical; min-height: 80px; font-family: monospace; }
+.form-row { display: flex; gap: 12px; }
+.form-row .form-group { flex: 1; }
+.checkbox-group { display: flex; align-items: center; gap: 8px; }
+.checkbox-group input { width: 18px; height: 18px; }
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.btn-primary { background: #4a9eff; color: #fff; }
+.btn-primary:hover { background: #357ae8; }
+.btn-secondary { background: #f0f0f0; color: #666; }
+.btn-secondary:hover { background: #e0e0e0; }
+.btn-group { display: flex; gap: 12px; margin-top: 24px; }
+.status {
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    margin-bottom: 16px;
+    display: none;
+}
+.status.success { background: #e6f7e6; color: #2d8a2d; display: block; }
+.status.error { background: #fde8e8; color: #c53030; display: block; }
+.status.info { background: #e8f0fe; color: #1a73e8; display: block; }
+.preview-frame {
+    width: 100%;
+    height: 500px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-top: 16px;
+}
+.divider {
+    height: 1px;
+    background: #eee;
+    margin: 20px 0;
+}
+.badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+}
+.badge-green { background: #e6f7e6; color: #2d8a2d; }
+.badge-gray { background: #f0f0f0; color: #999; }
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <h2>🎮 蔚蓝档案战绩插件</h2>
+        
+        <div id="status" class="status"></div>
+        
+        <div class="form-group">
+            <label>B站 UID</label>
+            <input type="text" id="biliUid" placeholder="例如: 123456789"/>
+            <div class="hint">打开 bilibili.com，右上角头像旁的数字</div>
+        </div>
+        
+        <div class="form-group">
+            <label>B站 Cookie</label>
+            <textarea id="cookie" placeholder="SESSDATA=xxx; bili_jct=xxx"></textarea>
+            <div class="hint">
+                浏览器打开 bilibili.com → F12 → Application → Cookies<br/>
+                复制 SESSDATA 和 bili_jct 的值，格式: SESSDATA=值1; bili_jct=值2
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label>刷新间隔（小时）</label>
+                <input type="number" id="refreshHours" value="6" min="1" max="24"/>
+            </div>
+            <div class="form-group">
+                <label>学员显示数量（0=不限）</label>
+                <input type="number" id="maxStudents" value="0" min="0"/>
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group">
+                <div class="checkbox-group">
+                    <input type="checkbox" id="autoRefresh" checked/>
+                    <label for="autoRefresh">自动刷新</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox-group">
+                    <input type="checkbox" id="showStudents" checked/>
+                    <label for="showStudents">显示学员列表</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox-group">
+                    <input type="checkbox" id="showRaids" checked/>
+                    <label for="showRaids">显示总力战</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label>页面标题</label>
+                <input type="text" id="pageTitle" value="蔚蓝档案战绩"/>
+            </div>
+            <div class="form-group">
+                <label>战绩页主题色</label>
+                <input type="color" id="themeColor" value="#6d5dfc" style="height:42px;padding:4px;"/>
+            </div>
+        </div>
+        
+        <div class="btn-group">
+            <button class="btn btn-primary" onclick="saveConfig()">💾 保存配置</button>
+            <button class="btn btn-secondary" onclick="refreshData()">🔄 立即刷新数据</button>
+            <button class="btn btn-secondary" onclick="previewPage()">👁️ 预览页面</button>
+        </div>
+        
+        <div id="preview-section" style="display:none;">
+            <div class="divider"></div>
+            <h2>📋 页面预览</h2>
+            <iframe id="preview" class="preview-frame"></iframe>
+        </div>
+    </div>
+    
+    <div class="card">
+        <h2>📖 使用说明</h2>
+        <div style="font-size:14px; color:#666; line-height:1.8;">
+            <p><strong>1. 配置步骤：</strong></p>
+            <ul style="margin-left:20px; margin-bottom:12px;">
+                <li>填写 B站 UID 和 Cookie</li>
+                <li>点击「保存配置」</li>
+                <li>点击「立即刷新数据」获取第一次数据</li>
+            </ul>
+            
+            <p><strong>2. 在博客中展示：</strong></p>
+            <p style="margin-left:20px; margin-bottom:8px;">在 Halo 文章/页面中插入：</p>
+            <pre style="background:#f5f5f5; padding:12px; border-radius:8px; font-size:12px; overflow-x:auto; margin-left:20px;">&lt;iframe src="/apis/console.api.blue-archive.halo.run/v1alpha1/stats/html" 
+        width="100%" height="1200" 
+        style="border:none;" loading="lazy"&gt;&lt;/iframe&gt;</pre>
+            
+            <p style="margin-top:12px;"><strong>3. Cookie 有效期：</strong>约 1-3 个月，过期后重新获取即可。</p>
+            <p><strong>4. 签名 URL：</strong>每次自动重新生成，永不过期。</p>
+        </div>
+    </div>
+</div>
+
+<script>
+// 读取 Cookie（用于携带 Halo 的 CSRF token）
+function getCookie(name) {
+    var m = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+    return m ? decodeURIComponent(m[1]) : '';
+}
+
+// 加载当前配置
+async function loadConfig() {
+    try {
+        const resp = await fetch('/apis/console.api.blue-archive.halo.run/v1alpha1/config');
+        const config = await resp.json();
+        
+        document.getElementById('biliUid').value = config.biliUid || '';
+        document.getElementById('refreshHours').value = config.refreshHours || 6;
+        document.getElementById('maxStudents').value = config.maxStudents ?? 0;
+        document.getElementById('pageTitle').value = config.pageTitle || '蔚蓝档案战绩';
+        document.getElementById('themeColor').value = config.themeColor || '#6d5dfc';
+        document.getElementById('autoRefresh').checked = config.autoRefresh !== false;
+        document.getElementById('showStudents').checked = config.showStudents !== false;
+        document.getElementById('showRaids').checked = config.showRaids !== false;
+        
+        if (config.cookieSet) {
+            showStatus('已加载当前配置（Cookie 已设置）', 'info');
+        }
+    } catch (e) {
+        showStatus('加载配置失败: ' + e.message, 'error');
+    }
+}
+
+// 保存配置
+async function saveConfig() {
+    const config = {
+        biliUid: document.getElementById('biliUid').value.trim(),
+        cookie: document.getElementById('cookie').value.trim(),
+        refreshHours: parseInt(document.getElementById('refreshHours').value) || 6,
+        maxStudents: parseInt(document.getElementById('maxStudents').value) || 0,
+        pageTitle: document.getElementById('pageTitle').value.trim() || '蔚蓝档案战绩',
+        themeColor: document.getElementById('themeColor').value || '#6d5dfc',
+        autoRefresh: document.getElementById('autoRefresh').checked,
+        showStudents: document.getElementById('showStudents').checked,
+        showRaids: document.getElementById('showRaids').checked
+    };
+    
+    if (!config.biliUid) {
+        showStatus('请填写 B站 UID', 'error');
+        return;
+    }
+    if (!config.cookie) {
+        showStatus('请填写 B站 Cookie', 'error');
+        return;
+    }
+    
+    try {
+        const resp = await fetch('/apis/console.api.blue-archive.halo.run/v1alpha1/config', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json', 'X-XSRF-TOKEN': getCookie('XSRF-TOKEN')},
+            body: JSON.stringify(config)
+        });
+        const result = await resp.json();
+        showStatus('✅ 配置已保存！点击「立即刷新数据」获取数据', 'success');
+    } catch (e) {
+        showStatus('保存失败: ' + e.message, 'error');
+    }
+}
+
+// 刷新数据
+async function refreshData() {
+    showStatus('⏳ 正在获取数据...', 'info');
+    try {
+        const resp = await fetch('/apis/console.api.blue-archive.halo.run/v1alpha1/refresh', {method: 'POST', headers: {'X-XSRF-TOKEN': getCookie('XSRF-TOKEN')}});
+        const result = await resp.json();
+        if (result.status === 'ok') {
+            showStatus('✅ 数据获取成功！共 ' + result.charCount + ' 个学员', 'success');
+        } else {
+            showStatus('❌ 数据获取失败：' + (result.message || '请检查 Cookie 是否有效'), 'error');
+        }
+    } catch (e) {
+        showStatus('请求失败: ' + e.message, 'error');
+    }
+}
+
+// 预览页面
+function previewPage() {
+    const section = document.getElementById('preview-section');
+    section.style.display = 'block';
+    document.getElementById('preview').src = '/apis/console.api.blue-archive.halo.run/v1alpha1/stats/html?' + Date.now();
+}
+
+// 显示状态消息
+function showStatus(msg, type) {
+    const el = document.getElementById('status');
+    el.textContent = msg;
+    el.className = 'status ' + type;
+    
+    if (type === 'success' || type === 'info') {
+        setTimeout(() => { el.className = 'status'; }, 5000);
+    }
+}
+
+// 页面加载时获取配置
+window.onload = loadConfig;
+</script>
+</body>
+</html>
