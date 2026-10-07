@@ -3,3 +3,4 @@ plugin.bluearchive.PluginConfig
 plugin.bluearchive.ConfigStore
 plugin.bluearchive.service.StatsService
 plugin.bluearchive.controller.StatsEndpoint
+plugin.bluearchive.controller.BaShortLinkRouter

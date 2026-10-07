@@ -63,7 +63,7 @@ public class StatsEndpoint implements CustomEndpoint {
     public RouterFunction<ServerResponse> endpoint() {
         return RouterFunctions.route()
             .GET("/stats", this::getStats)
-            .GET("/stats/html", this::getStatsHtml)
+            .GET("/stats/html", this::statsHtml)
             .GET("/config", this::getConfig)
             .POST("/config", this::updateConfig)
             .POST("/refresh", this::refresh)
@@ -79,7 +79,8 @@ public class StatsEndpoint implements CustomEndpoint {
                 : ServerResponse.status(503).build());
     }
 
-    private Mono<ServerResponse> getStatsHtml(ServerRequest request) {
+    /** 战绩页 HTML（供 /apis 端点与 /ba、/stats 短链共用） */
+    public Mono<ServerResponse> statsHtml(ServerRequest request) {
         return Mono.fromCallable(() -> {
             PlayerStats s;
             if ("1".equals(request.queryParam("demo").orElse(""))) {

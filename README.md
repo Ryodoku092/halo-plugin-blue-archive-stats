@@ -19,6 +19,7 @@ This plugin was developed with substantial assistance from AI coding tools, unde
 
 ## ✨ 功能
 
+- 🔗 **前台短链接**：`/ba`、`/stats` 直达战绩页，免登录公开访问
 - 📖 **档案图录风战绩页**：暖纸底 + 衬线大数字 + 编号分节，学员立绘装裱展品，官方星级/属性图标（图片直链 B站 CDN，`referrerpolicy=no-referrer`）
 - 🗂 **双侧栏**：桌面（≥1440px）左右两栏；移动端（<1440px）转为悬浮按钮 + 抽屉/底部弹层——章节索引（scrollspy）、学员速查（直达展品）、好感 Top5、属性分布版画、战果批注
 - 🔄 **自动刷新**：Cookie → 签名 URL → 战绩 API；stale-while-revalidate 读路径不阻塞；ETag/304 复访零字节
@@ -32,13 +33,16 @@ This plugin was developed with substantial assistance from AI coding tools, unde
 1. [Releases](../../releases) 下载 `plugin-blue-archive-stats-x.y.z.jar`
 2. Halo 控制台 → 插件 → 安装插件 → 上传 JAR → 启用
 3. 插件设置：填 B站 UID 与 Cookie（至少含 `SESSDATA`、`bili_jct`、`DedeUserID`）→ 保存 → 立即刷新
-4. 文章内嵌入：
+4. 前台访问战绩页（三种等价方式）：
+   - **短链接（推荐）**：`https://你的域名/ba` 或 `/stats`，可直接加入博客导航菜单
+   - 完整路径：`/apis/console.api.blue-archive.halo.run/v1alpha1/stats/html`
+   - 文章内嵌 iframe：
 
 ```html
-<iframe src="/apis/console.api.blue-archive.halo.run/v1alpha1/stats/html" width="100%" height="1200" style="border:none"></iframe>
+<iframe src="/ba" width="100%" height="1200" style="border:none" loading="lazy"></iframe>
 ```
 
-预览（无需 Cookie）：`…/stats/html?demo=1`
+预览（无需 Cookie）：`/ba?demo=1`
 
 ## 🛠 构建
 
