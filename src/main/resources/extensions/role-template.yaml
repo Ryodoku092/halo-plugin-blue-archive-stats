@@ -7,6 +7,8 @@
 #   GET /apis/console.api.blue-archive.halo.run/v1alpha1/stats        → verb=list
 #   GET /apis/console.api.blue-archive.halo.run/v1alpha1/stats/html   → verb=get (name=html)
 # config/refresh/admin 不在此列 → 仍仅管理员可访问。
+# 短链接 /ba、/stats (BaShortLinkRouter): 属插件直接注册的 RouterFunction，
+# 与主题页面同级、不经 CustomEndpoint RBAC → 天然公开，无需在此授权。
 apiVersion: v1alpha1
 kind: Role
 metadata:

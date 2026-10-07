@@ -59,7 +59,7 @@ const API = "/apis/console.api.blue-archive.halo.run/v1alpha1";
 const stats = ref<PlayerStats | null>(null);
 const refreshing = ref(false);
 const saving = ref(false);
-const embedCode = `<iframe src="${API}/stats/html" width="100%" height="1200" style="border:none;" loading="lazy"></iframe>`;
+const embedCode = `<iframe src="/ba" width="100%" height="1200" style="border:none;" loading="lazy"></iframe>`;
 
 onMounted(() => {
   loadConfig();
@@ -387,15 +387,21 @@ async function copyEmbed() {
         </template>
       </VCard>
 
-      <!-- 使用说明 -->
-      <VCard class="ba-card" title="使用说明">
+      <!-- 使用教程 -->
+      <VCard class="ba-card" title="使用教程">
         <template #default>
           <ol class="ba-steps">
-            <li>填写 B站 UID 和 Cookie，点击「保存配置」</li>
-            <li>点击右上角「立即刷新」获取战绩数据</li>
-            <li>在文章中插入下方代码即可展示战绩页面</li>
-            <li>开启自动刷新后，数据过期会按间隔自动补充</li>
+            <li><b>获取 Cookie</b>：电脑浏览器登录 bilibili.com → 按 F12 打开开发者工具 → 网络(Network)标签 → 刷新页面 → 点任意一条发往 bilibili.com 的请求 → 请求标头里找到 <code>Cookie:</code> 整行复制（至少需包含 <code>SESSDATA</code>、<code>bili_jct</code>、<code>DedeUserID</code>）</li>
+            <li><b>填写配置</b>：上方填入 B站 UID（个人空间主页 URL 里的数字）和刚复制的 Cookie，按需调整刷新间隔与主题色，点「保存配置」</li>
+            <li><b>拉取数据</b>：点右上角「立即刷新」，提示成功后「玩家数据」卡片会显示你的战绩摘要；若报错会给出中文原因（多为 Cookie 过期，重新复制保存即可）</li>
+            <li><b>前台访问</b>：战绩页短链接为 <code>/ba</code>（或 <code>/stats</code>），可直接加入后台「外观 → 菜单」的导航项；未配 Cookie 时可访问 <code>/ba?demo=1</code> 预览样式</li>
+            <li><b>嵌入文章</b>：新建/编辑页面时切到 HTML 源码模式，粘贴下方 iframe 代码（可视化编辑器可能过滤 iframe，务必用源码模式）</li>
+            <li><b>自动更新</b>：开启自动刷新后按设定间隔后台更新，读者访问永不等待；Cookie 失效时页面自动降级为优雅空态页，不会报错白屏</li>
           </ol>
+          <p class="ba-help" style="margin-top:10px">
+            源码仓库与更新：<a href="https://github.com/Ryodoku092/halo-plugin-blue-archive-stats" target="_blank">GitHub</a> ·
+            问题反馈：<a href="https://github.com/Ryodoku092/halo-plugin-blue-archive-stats/issues" target="_blank">提 Issue</a>
+          </p>
         </template>
         <template #footer>
           <div class="ba-embed">
@@ -534,6 +540,23 @@ async function copyEmbed() {
   line-height: 2;
   font-size: 13px;
   color: rgba(148, 163, 184, 0.95);
+}
+.ba-steps b {
+  color: rgba(226, 232, 240, 0.95);
+}
+.ba-steps code,
+.ba-help code {
+  background: rgba(148, 163, 184, 0.15);
+  border-radius: 4px;
+  padding: 1px 6px;
+  font-size: 12px;
+}
+.ba-help a {
+  color: #5c6ee6;
+  text-decoration: none;
+}
+.ba-help a:hover {
+  text-decoration: underline;
 }
 .ba-embed {
   display: flex;
